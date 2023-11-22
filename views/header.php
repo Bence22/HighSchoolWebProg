@@ -7,9 +7,10 @@
       <span></span>
       <ul class="menu" id="menu">
         <li><a href="/">Kezdőlap</a></li>
-        <li><a href="/">Képzések</a></li>
+        <li><a href="/list/kepzesek.php">Képzések</a></li>
         <li><a href="/">Felvételi</a>
-        <li><a href="/">Ponthatárok</a></li>
+        <li><a href="/list/ponthatar.php">Ponthatárok</a></li>
+      <li><a href="/database/database.php">Eredménykereső</a></li></li>
         <?php
         if (empty($_SESSION[SESSION_USER_LOGGED_IN])) {
           echo '
