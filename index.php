@@ -1,10 +1,12 @@
 <?php
 
+
 use base\router\Router;
 require 'global.php';
 $router = new Router();
 $router->route();
 $controller = $router->controller();
+
 ?>
 
 <!DOCTYPE html>

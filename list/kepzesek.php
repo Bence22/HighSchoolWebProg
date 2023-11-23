@@ -1,20 +1,21 @@
 <?php
+
+require 'database/Database.php';
+$database = new Database("localhost", "highschool", "admin", "log");
+
 $dbh = new PDO('mysql:host=localhost;dbname=highschool', 'admin', 'log', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
 
 $stmt = $dbh->query("SELECT nev, felveheto FROM kepzes");
 
+$data = [];
 echo '<ul>';
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo '<li>' . $row['nev'] .  ' - Felveheto: ' . $row['felveheto'] '</li>';
-}
-echo '</ul>';
-
-$data = [];
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo '<li>' . $row['nev'] .  ' - Felveheto: ' . $row['felveheto'] . '</li>';
     $data['labels'][] = $row['nev'];
     $data['data'][] = $row['felveheto'];
 }
+echo '</ul>';
 
 echo '<script>';
 echo 'var chartData = ' . json_encode($data) . ';';

@@ -10,7 +10,8 @@
         <li><a href="/list/kepzesek.php">Képzések</a></li>
         <li><a href="/">Felvételi</a>
         <li><a href="/list/ponthatar.php">Ponthatárok</a></li>
-      <li><a href="/database/database.php">Eredménykereső</a></li></li>
+      <li><a href="/list/datasearch.php">Eredménykereső</a></li>
+    <li><a href="/restful/kliens.php">Jelentkező hozzáadása</a></li></li>
         <?php
         if (empty($_SESSION[SESSION_USER_LOGGED_IN])) {
           echo '
