@@ -34,7 +34,7 @@
         echo '<span class="username"> ' . $_SESSION[SESSION_CURRENT_USER_NAME] . '</span>';
       }
       ?>
-      to Nobel Középiskola</h1>
+      a Nobel Középiskolában!</h1>
     <p>Your Perfect Getaway</p>
   </div>
 </header>

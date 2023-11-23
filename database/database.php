@@ -3,7 +3,7 @@
     case 'jelentkezes':
       $eredmeny = array("lista" => array());
       try {
-        $dbh = new PDO('mysql:host=localhost;dbname=highschool', 'root', '',
+        $dbh = new PDO('mysql:host=localhost;dbname=highschool', 'admin', 'log',
                       array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
         $stmt = $dbh->query("select jelentkezoid, kepzesid, szerzett from orszag");

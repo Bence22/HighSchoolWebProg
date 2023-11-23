@@ -26,7 +26,7 @@ $controller = $router->controller();
     echo '<main> ' . $content . '</main>';
   }
 ?>
-<?php include 'views/footer.php'; ?>
+<?php include 'views/footer.html'; ?>
 <script src="/assets/js/script.js"></script>
 
 </body>
