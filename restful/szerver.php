@@ -2,14 +2,14 @@
 
 $eredmeny = "";
 try {
-	$dbh = new PDO('mysql:host=localhost;dbname=highschool', 'admin', 'log',
+	$dbh = new PDO('mysql:host=localhost;dbname=web2', 'root', '',
 				  array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 	$dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
 	switch($_SERVER['REQUEST_METHOD']) {
 		case "GET":
-				$sql = "SELECT * FROM jelentkezo";     
+				$sql = "SELECT * FROM felhasznalok";     
 				$sth = $dbh->query($sql);
-				$eredmeny .= "<table style=\"border-collapse: collapse;\"><tr><th></th><th>id</th><th>nev</th><th>nem</th></tr>";
+				$eredmeny .= "<table style=\"border-collapse: collapse;\"><tr><th></th><th>Családi név</th><th>Utónév</th><th>Login név</th><th>Kódolt jelszó</th></tr>";
 				while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 					$eredmeny .= "<tr>";
 					foreach($row as $column)
@@ -26,10 +26,10 @@ try {
 				print_r($data);
 				print_r($_POST);
 				*/
-				$sql = "insert into jelentkezo values (0, :csn, :nm)";
+				$sql = "insert into felhasznalok values (0, :csn, :un, :bn, :jel)";
 				$sth = $dbh->prepare($sql);
-				$count = $sth->execute(Array(":csn"=>$data["csn"], ":nm"=>$data["nm"]));
-				//$count = $sth->execute(Array(":csn"=>$_POST["csn"], ":nm"=>$_POST["nm"]));				
+				$count = $sth->execute(Array(":csn"=>$data["csn"], ":un"=>$data["un"], ":bn"=>$data["bn"], ":jel"=>$data["jel"]));
+				//$count = $sth->execute(Array(":csn"=>$_POST["csn"], ":un"=>$_POST["un"], ":bn"=>$_POST["bn"], ":jel"=>$_POST["jel"]));				
 				$newid = $dbh->lastInsertId();
 				$eredmeny .= $count." beszúrt sor: ".$newid;
 			break;
@@ -38,9 +38,11 @@ try {
 				$incoming = file_get_contents("php://input");
 				parse_str($incoming, $data);
 				$modositando = "id=id"; $params = Array(":id"=>$data["id"]);
-				if($data['csn'] != "") {$modositando .= ", nev = :csn"; $params[":csn"] = $data["csn"];}
-				if($data['nm'] != "") {$modositando .= ", nem = :nm"; $params[":nm"] = $data["nm"];}
-				$sql = "update felhasznalokjelentkezo set ".$modositando." where id=:id";
+				if($data['csn'] != "") {$modositando .= ", csaladi_nev = :csn"; $params[":csn"] = $data["csn"];}
+				if($data['un'] != "") {$modositando .= ", utonev = :un"; $params[":un"] = $data["un"];}
+				if($data['bn'] != "") {$modositando .= ", bejelentkezes = :bn"; $params[":bn"] = $data["bn"];}
+				if($data['jel'] != "") {$modositando .= ", jelszo = :jel"; $params[":jel"] = sha1($data["jel"]);}
+				$sql = "update felhasznalok set ".$modositando." where id=:id";
 				$sth = $dbh->prepare($sql);
 				$count = $sth->execute($params);
 				$eredmeny .= $count." módositott sor. Azonosítója:".$data["id"];
@@ -49,7 +51,7 @@ try {
 				$data = array();
 				$incoming = file_get_contents("php://input");
 				parse_str($incoming, $data);
-				$sql = "delete from jelentkezo where id=:id";
+				$sql = "delete from felhasznalok where id=:id";
 				$sth = $dbh->prepare($sql);
 				$count = $sth->execute(Array(":id" => $data["id"]));
 				$eredmeny .= $count." sor törölve. Azonosítója:".$data["id"];
