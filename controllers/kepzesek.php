@@ -1,10 +1,9 @@
 <?php
 spl_autoload_register('yourAutoloadFunction');
 
-class Kepzes_Controller
+class Kepzesek_Controller
 {
-    public $baseName = 'kepzes';  
-
+    public $baseName = 'kepzesek';  
     public function main(array $vars) 
     {
         
