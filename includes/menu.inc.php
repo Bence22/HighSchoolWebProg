@@ -2,11 +2,11 @@
 class Menu {
     public static $menu = array(
         "nyitolap" => array("Nyitólap", "", "111"),    
-        "elerhetoseg" => array("Felvételi", "", "100"),    
+        "elerhetoseg" => array("Elérhetőség", "", "111"),    
         "kepzesek" => array("Képzések", "", "111"),    
-        "felveteli" => array("Elérhetőség", "", "111"),    
-        "ponthatarok" => array("Ponthatárok", "elerhetoseg", "011"), 
-        "eredmenyek" => array("Eredménykereső", "elerhetoseg", "011"),
+        "felveteli" => array("Felvételi", "", "100"),    
+        "ponthatarok" => array("Ponthatárok", "felveteli", "011"), 
+        "eredmenyek" => array("Eredmények", "felveteli", "011"),
         "jelentkezo" => array("Jelentkező", "", "111"),  
         "belepes" => array("Belépés", "", "100"),    
         "kilepes" => array("Kilépés", "", "011"),    

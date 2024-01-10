@@ -1,6 +1,6 @@
 <?php
     define('HOST', 'localhost');
-    define('DATABASE', 'web2');
+    define('DATABASE', 'web22');
     define('USER', 'root');
     define('PASSWORD', '');
     
