@@ -10,7 +10,6 @@ class Menu {
         "jelentkezo" => array("Jelentkező", "", "111"),  
         "belepes" => array("Belépés", "", "100"),    
         "kilepes" => array("Kilépés", "", "011"),    
-        "admin" => array("Admin", "", "001")
     );
 
     public static function getMenu($sItems) {

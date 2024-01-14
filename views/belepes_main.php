@@ -1,40 +1,67 @@
 <?php
+session_start();
 
-    if(isset($_POST['felhasznalo']) && isset($_POST['jelszo'])) {
-        try {
-            // Kapcsolódás
-            $dbh = new PDO('mysql:host=localhost;dbname=web2', 'bence22', 'Nobel00',
-                            array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
-            $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
-            
-            // Felhsználó keresése
-            $sqlSelect = "select id, csaladi_nev, utonev from felhasznalok where bejelentkezes = :bejelentkezes and jelszo = sha1(:jelszo)";
-            $sth = $dbh->prepare($sqlSelect);
-            $sth->execute(array(':bejelentkezes' => $_POST['felhasznalo'], ':jelszo' => $_POST['jelszo']));
-            $row = $sth->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
-            echo "Hiba: ".$e->getMessage();
-        }      
+// Példa adatbázisból
+$registeredUsers = array(
+    'user1' => array('password' => 'password1', 'role' => 'user'),
+    'admin1' => array('password' => 'adminpassword1', 'role' => 'admin')
+);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['felhasznalo'];
+    $password = $_POST['jelszo'];
+
+    // Ellenőrizzük a bejelentkezési adatokat
+    if (array_key_exists($username, $registeredUsers) && $registeredUsers[$username]['password'] === $password) {
+        // Sikeres bejelentkezés
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = $registeredUsers[$username]['role'];
+        header('Location: index.php');
+        exit;
+    } else {
+        // Sikertelen bejelentkezés
+        $errorMessage = 'Hibás felhasználónév vagy jelszó!';
     }
+}
+
+// Ellenőrizze, hogy a felhasználó be van-e jelentkezve
+$loggedIn = isset($_SESSION['username']);
+
+// Ellenőrizze, hogy a felhasználó milyen szerepkörben van
+$role = $loggedIn ? $_SESSION['role'] : 'visitor';
 ?>
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Belépés</title>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <?php if(isset($row)) { ?>
-            <?php if($row) { ?>
-                <h1>Bejelentkezett:</h1>
-                Azonosító: <strong><?= $row['id'] ?></strong><br><br>
-                Név: <strong><?= $row['csaladi_nev']." ".$row['uto_nev'] ?></strong>
-            <?php } else { ?>
-                <h1>A bejelentkezés nem sikerült!</h1>
-                <a href="pelda.html" >Próbálja újra!</a>
-            <?php } ?>
-        <?php } ?>
-    </body>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+</head>
+<body>
+
+<h1>Bejelentkezés</h1>
+
+<?php
+if (isset($errorMessage)) {
+    echo '<p style="color: red;">' . $errorMessage . '</p>';
+}
+
+// Ha be van jelentkezve, írja ki a szerepkört
+if ($loggedIn) {
+    echo '<p>Bejelentkezve, Szerepkör: <strong>' . ucfirst($role) . '</strong></p>';
+}
+?>
+
+<form action="" method="post">
+    <label for="felhasznalo">Felhasználónév:</label>
+    <input type="text" id="felhasznalo" name="felhasznalo" required>
+    
+    <label for="jelszo">Jelszó:</label>
+    <input type="password" id="jelszo" name="jelszo" required>
+
+    <button type="submit">Bejelentkezés</button>
+</form>
+
+</body>
 </html>
