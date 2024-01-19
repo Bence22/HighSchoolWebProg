@@ -8,8 +8,7 @@ class Menu {
         "ponthatarok" => array("Ponthatárok", "felveteli", "011"), 
         "eredmenyek" => array("Eredmények", "felveteli", "011"),
         "jelentkezo" => array("Jelentkező", "", "111"),  
-        "belepes" => array("Belépés", "", "100"),    
-        "kilepes" => array("Kilépés", "", "011"),    
+        "belepes" => array("Belépés", "", "100"),     
     );
 
     public static function getMenu($sItems) {
