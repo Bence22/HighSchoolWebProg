@@ -1,5 +1,5 @@
 <?php
-spl_autoload_register('yourAutoloadFunction');
+
 
 class Kepzesek_Controller
 {

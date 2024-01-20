@@ -1,13 +1,19 @@
 <?php
-spl_autoload_register('yourAutoloadFunction');
 
 class Kilepes_Controller
 {
-	public $baseName = 'kilepes'; 
+	public $baseName = 'kilepes';  
 	public function main(array $vars) 
 	{
+		$kilepesModel = new Kilepes_Model;  
 		
-		$view = new View_Loader($this->baseName."_main");
+		$retData = $kilepesModel->get_data(); 
+		
+		$view = new View_Loader($this->baseName.'_main');
+		
+		foreach($retData as $name => $value)
+			$view->assign($name, $value);
 	}
 }
+
 ?>

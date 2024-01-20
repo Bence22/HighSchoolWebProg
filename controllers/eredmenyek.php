@@ -1,7 +1,5 @@
 <?php
 
-spl_autoload_register('yourAutoloadFunction');
-
 class Eredmenyek_Controller
 {
 	public $baseName = 'eredmenyek'; 

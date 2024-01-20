@@ -1,7 +1,5 @@
 <?php
 
-spl_autoload_register('yourAutoloadFunction');
-
 class Felveteli_Controller
 {
 	public $baseName = 'felveteli'; 

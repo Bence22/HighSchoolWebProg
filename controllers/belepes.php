@@ -1,5 +1,4 @@
 <?php
-spl_autoload_register('yourAutoloadFunction');
 
 class Belepes_Controller
 {

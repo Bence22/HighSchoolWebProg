@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+if(! isset($_SESSION['userid'])) $_SESSION['userid'] = 0;
+if(! isset($_SESSION['userfirstname'])) $_SESSION['userfirstname'] = "";
+if(! isset($_SESSION['userlastname'])) $_SESSION['userlastname'] = "";
+if(! isset($_SESSION['userlevel'])) $_SESSION['userlevel'] = "1__";
+
+include(SERVER_ROOT . 'includes/database.inc.php');
 include(SERVER_ROOT . 'includes/menu.inc.php');
 
 // Felbontjuk a param�tereket. Az & elv�laszt� jellel v�gzett felbont�s
@@ -24,8 +31,8 @@ if($request != "")
 			$vars[] = $subpage; // akkor ez egy parameter
 			$subpage = ""; // �s nincs aloldal
 		}
-		
 	}
+	$vars += $_POST;
 	
 	foreach($params as $p) // a param�terek t�mbje felt�lt�se
 	{
@@ -52,17 +59,16 @@ if(class_exists($class))
 else
 	{ die('class does not exists!'); }
 
+// spl_autoload_register(...) f�ggv�ny, amely ismeretlen oszt�ly h�v�sakor, megpr�b�lja automatikusan bet�lteni a megfelel� f�jlt. 
+// A modellekhez haszn�ljuk, egys�gesen nevezz�k el f�jljainkat (oszt�ly nev�vel megegyez�, csupa kisbet�s .php)
+spl_autoload_register(function($className) {
+    $file = SERVER_ROOT.'models/'.strtolower($className).'.php';
+    if(file_exists($file))
+    { include_once($file); }
+    else
+    { die("File '$filename' containing class '$className' not found.");    }
+});
+
 $controller->main($vars);
-
-
-function yourAutoloadFunction($className)
-{
-	$file = SERVER_ROOT.'models/'.strtolower($className).'.php';
-	if(file_exists($file))
-	{ include_once($file); }
-	else
-	{ die("File '$file' containing class '$className' not found."); }
-}
-spl_autoload_register('yourAutoloadFunction');
 
 ?>

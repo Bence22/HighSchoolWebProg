@@ -71,10 +71,7 @@ curl_close($ch);
     <title>REST GYAKORLAT</title>
 </head>
 <body>
-    <?= $result ?>
-    <h1>Felhasználók:</h1>
-    <?= $tabla ?>
-    <br>
+  <p>Amennyiben változtatni szeretne a megadott adatain itt megteheti.</p>
     <h2>Módosítás / Beszúrás</h2>
     <form method="post">
     Id: <input type="text" name="id"><br><br>

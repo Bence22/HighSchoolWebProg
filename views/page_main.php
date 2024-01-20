@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Nobel Gimnázium</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo SITE_ROOT?>css/main_style.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo SITE_ROOT?>css/main_style1.css">
     </head>
     <body>
         <header>

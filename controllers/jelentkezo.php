@@ -1,7 +1,5 @@
 <?php
 
-spl_autoload_register('yourAutoloadFunction');
-
 class Jelentkezo_Controller
 {
     public $baseName = 'kliens';  

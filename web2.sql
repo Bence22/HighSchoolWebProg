@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 14. 13:34
+-- Létrehozás ideje: 2024. Jan 21. 00:23
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -41,16 +41,10 @@ CREATE TABLE `felhasznalok` (
 --
 
 INSERT INTO `felhasznalok` (`id`, `csaladi_nev`, `utonev`, `bejelentkezes`, `jelszo`, `jogosultsag`) VALUES
-(1, 'Rendszer', 'Admin', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '__1'),
-(2, 'Családi_2', 'Utónév_2', 'Login2', '6cf8efacae19431476020c1e2ebd2d8acca8f5c0', '_1_'),
-(3, 'Családi_3', 'Utónév_3', 'Login3', 'df4d8ad070f0d1585e172a2150038df5cc6c891a', '_1_'),
-(4, 'Családi_4', 'Utónév_4', 'Login4', 'b020c308c155d6bbd7eb7d27bd30c0573acbba5b', '_1_'),
-(5, 'Családi_5', 'Utónév_5', 'Login5', '9ab1a4743b30b5e9c037e6a645f0cfee80fb41d4', '_1_'),
-(6, 'Családi_6', 'Utónév_6', 'Login6', '7ca01f28594b1a06239b1d96fc716477d198470b', '_1_'),
-(7, 'Családi_7', 'Utónév_7', 'Login7', '41ad7e5406d8f1af2deef2ade4753009976328f8', '_1_'),
-(8, 'Családi_8', 'Utónév_8', 'Login8', '3a340fe3599746234ef89591e372d4dd8b590053', '_1_'),
-(9, 'Családi_9', 'Utónév_9', 'Login9', 'c0298f7d314ecbc5651da5679a0a240833a88238', '_1_'),
-(10, 'Családi_10', 'Utónév_10', 'Login10', 'a477427c183664b57f977661ac3167b64823f366', '_1_');
+(11, 'Admin', 'Admin', 'admin', '8ac3abd60d9a380096e4609be6e2b34f3e5d85ca', '__1'),
+(12, 'Login', 'Laci', 'loginl', '$2y$10$3qEsGvz95zgojT0l4BKtUey8T9Yl/Ff.C', '_1_'),
+(13, 'Login', 'Peti', 'loginp', '$2y$10$64BjQ1b8oWbdCNG/k6Vjlen87IhyirlNO', '_1_'),
+(14, 'Login', 'Zoli', 'zolika', '8421f006e0f3ea36919af3f7b92d2b803b8c790b', '_1_');
 
 -- --------------------------------------------------------
 
@@ -1383,14 +1377,16 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
+('admin', 'Admin', '', '001', 90),
 ('belepes', 'Belépés', '', '100', 60),
 ('elerhetoseg', 'Elérhetőség', '', '111', 20),
-('eredmenyek', 'Eredmények', 'felveteli', '111', 40),
-('felveteli', 'Felvételi', '', '001', 80),
-('kepzesek', 'Képzések', '', '100', 30),
+('eredmenyek', 'Eredmények', 'felveteli', '111', 55),
+('Felhasználó módosítása', 'Jelentkező', '', '011', 30),
+('felveteli', 'Felvételi', '', '111', 50),
+('kepzesek', 'Képzések', '', '111', 40),
 ('kilepes', 'Kilépés', '', '011', 70),
 ('nyitolap', 'Nyitólap', '', '111', 10),
-('pontszamok', 'Pontszámok', 'felveteli', '011', 50);
+('pontszamok', 'Pontszámok', 'felveteli', '111', 56);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -1416,7 +1412,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT a táblához `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

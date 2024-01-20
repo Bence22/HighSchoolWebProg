@@ -1,6 +1,5 @@
 <?php
 
-spl_autoload_register('yourAutoloadFunction');
 
 class Felveteli_Eredmenyek_Controller
 {
