@@ -12,7 +12,7 @@
 <form action="<?= SITE_ROOT ?>regisztracio" method="post">
     <label for="csaladi_nev">Családi név:</label><input type="text" name="csaladi_nev" id="csaladi_nev" required><br>
     <label for="utonev">Utónév:</label><input type="text" name="utonev" id="utonev" required><br>
-    <label for="bejelentkezes">Felhasználónév:</label><input type="text" name="bejelentkezes" id="bejelentkezes" required pattern="[a-zA-Z][\-\.a-zA-Z0-9_]{3}[\-\.a-zA-Z0-9_]+"><br>
-    <label for="jelszo">Jelszó:</label><input type="password" name="jelszo" id="jelszo" required pattern="[\-\.a-zA-Z0-9_]{4}[\-\.a-zA-Z0-9_]+"><br>
+    <label for="bejelentkezes">Felhasználónév:</label><input type="text" name="bejelentkezes" id="bejelentkezes" required><br>
+    <label for="jelszo">Jelszó:</label><input type="password" name="jelszo" id="jelszo" required><br>
     <input type="submit" value="Regisztráció">
 </form>
