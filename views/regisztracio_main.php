@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = "A megadott felhasználónév már foglalt.";
     } else {
         // Jelszó titkosítása
-        $hash_jelszo = password_hash($jelszo, PASSWORD_BCRYPT);
+        $hash_jelszo = sha1($jelszo);
 
         // Felhasználó hozzáadása az adatbázishoz
         $insert_query = $dbh->prepare("INSERT INTO felhasznalok (csaladi_nev, utonev, bejelentkezes, jelszo) VALUES (:csaladi_nev, :utonev, :bejelentkezes, :jelszo)");
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($insert_query->execute()) {
             
-            echo "Sikeres regisztráció! Kérem, lépjen vissza a Belépő felületre.";
+            echo "Sikeres regisztráció! Kérem,jelentkezzen be a Belépés felületen.";
             exit();
         } else {
             $error_message = "Hiba történt a regisztráció során. Kérjük, próbálja újra.";
