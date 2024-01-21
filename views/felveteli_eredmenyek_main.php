@@ -10,30 +10,38 @@
 
 <h1>Itt keresheted meg az eredményeidet:</h1>
 
-<label for="jelentkezesID">Jelentkezés azonosító:</label>
-<input type="text" id="jelentkezesID">
-<button onclick="getData('jelentkezes')">Lekérés</button>
+<div>
+    <label for="jelentkezesID">Jelentkezés azonosító:</label>
+    <input type="text" id="jelentkezesID">
+</div>
 
-<label for="jelentkezoID">Jelentkező azonosító:</label>
-<input type="text" id="jelentkezoID">
-<button onclick="getData('jelentkezo')">Lekérés</button>
+<div>
+    <label for="jelentkezoID">Jelentkező azonosító:</label>
+    <input type="text" id="jelentkezoID">
+</div>
 
-<label for="kepzesID">Képzés azonosító:</label>
-<input type="text" id="kepzesID">
-<button onclick="getData('kepzes')">Lekérés</button>
+<div>
+    <label for="kepzesID">Képzés azonosító:</label>
+    <input type="text" id="kepzesID">
+</div>
+
+<button onclick="getData()">Lekérés</button>
 
 <div id="result"></div>
 
 <script>
-function getData(op) {
-    var id = $('#' + op + 'ID').val();
+function getData() {
+    var jelentkezesID = $('#jelentkezesID').val();
+    var jelentkezoID = $('#jelentkezoID').val();
+    var kepzesID = $('#kepzesID').val();
 
     $.ajax({
         type: 'POST',
         url: 'ajax_handler.php',
-        data: { op: op, id: id },
+        data: { op: 'jelentkezes', id: jelentkezesID, jelentkezoID: jelentkezoID, kepzesID: kepzesID },
         dataType: 'json',
         success: function(response) {
+            // Az adatok kezelése, pl. megjelenítése
             displayResult(response);
         },
         error: function(error) {
@@ -48,13 +56,14 @@ function displayResult(data) {
 
     if (data.lista && data.lista.length > 0) {
         resultDiv.append('<h2>Eredmények:</h2>');
-        resultDiv.append('<ul>');
+        resultDiv.append('<table border="1">');
+        resultDiv.append('<tr><th>ID</th><th>Név</th><th>Szerzett</th></tr>');
 
         data.lista.forEach(function(item) {
-            resultDiv.append('<li>ID: ' + item.id + ', Név: ' + item.nev + ', Szerzett: ' + item.szer + '</li>');
+            resultDiv.append('<tr><td>' + item.id + '</td><td>' + item.nev + '</td><td>' + item.szer + '</td></tr>');
         });
 
-        resultDiv.append('</ul>');
+        resultDiv.append('</table>');
     } else {
         resultDiv.append('<p>Nincs találat.</p>');
     }
